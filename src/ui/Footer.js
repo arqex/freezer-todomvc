@@ -1,4 +1,4 @@
-var React = require('react/addons');
+var React = require('react');
 var Utils = require('../utils');
 var State = require('../state');
 
@@ -31,8 +31,6 @@ module.exports = React.createClass({
 			);
 		}
 
-		// React idiom for shortcutting to `classSet` since it'll be used often
-		var cx = React.addons.classSet;
 		return (
 			<footer className="footer">
 				<span className="todo-count">

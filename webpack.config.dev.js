@@ -2,8 +2,10 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  //devtool: 'eval',
+  devtool: 'eval',
   entry: [
+    'webpack-dev-server/client?http://localhost:3000',
+    'webpack/hot/only-dev-server',
     './src/boot.js'
   ],
   output: {
@@ -12,15 +14,12 @@ module.exports = {
     publicPath: '/static/'
   },
   plugins: [
-		new webpack.optimize.UglifyJsPlugin({minimize: true}),
-		new webpack.DefinePlugin({
-			'process.env': { NODE_ENV: '"production"'}
-		})
+    new webpack.HotModuleReplacementPlugin()
   ],
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['babel'],
+      loaders: ['react-hot', 'babel'],
       include: path.join(__dirname, 'src')
     }]
   }

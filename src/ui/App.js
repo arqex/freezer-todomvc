@@ -1,4 +1,4 @@
-var React = require('react/addons'),
+var React = require('react'),
 	TodoFooter = require('./Footer'),
 	TodoList = require('./TodoList'),
 	State = require('../state')
