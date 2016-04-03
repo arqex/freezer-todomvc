@@ -5,7 +5,7 @@ This is an example on how to use the awesome library [Freezer](https://github.co
 
 It uses [React.js](https://facebook.github.io/react/), of course and the outstanding [react-hot-loader](https://github.com/gaearon/react-hot-loader) as a development server.
 
-#### [Check the live DEMO](http://freezer-todos.divshot.io/)
+#### [Check the live DEMO](https://freezer-todomvc.firebaseapp.com/)
 
 ### Install and use
 
