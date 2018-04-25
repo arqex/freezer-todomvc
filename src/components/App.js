@@ -1,42 +1,40 @@
-var React = require('react'),
-	TodoFooter = require('./Footer'),
-	TodoList = require('./TodoList'),
-	State = require('../state')
-;
+import React from 'react';
+import TodoFooter from './Footer';
+import TodoList from './TodoList';
+import store from '../state/store';
 
 var ENTER_KEY = 13;
 
-var TodoApp = React.createClass({
-
-	componentDidMount: function () {
+class TodoApp extends React.Component {
+	componentDidMount () {
 		var me = this;
 
 		// Here the magic happens. Everytime that the
 		// state is updated the app will re-render.
 		// A real data driven app.
-		State.on('update', function(){
+		store.on('update', function(){
 			me.forceUpdate();
 		});
-	},
+	}
 
-	handleNewTodoKeyDown: function (event) {
+	handleNewTodoKeyDown (event) {
 		if (event.keyCode !== ENTER_KEY) {
 			return;
 		}
 
 		event.preventDefault();
-		State.trigger('todo:create', State.get().todoInput.trim() );
-	},
+		store.emit('todo:create', store.get().todoInput.trim() );
+	}
 
-	updateTodoInput: function( e ){
+	updateTodoInput( e ){
 		// Update inputs needs to be done synchronously,
 		// so we use the now method.
 		// We don't need to use a reaction for this.
-		State.get().set({ todoInput: e.target.value }).now();
-	},
+		store.get().set({ todoInput: e.target.value }).now();
+	}
 
-	render: function () {
-		var state = State.get(),
+	render () {
+		var state = store.get(),
 			todos = state.todos,
 			activeCount = 0,
 			completedCount = 0,
@@ -86,6 +84,6 @@ var TodoApp = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
-module.exports = TodoApp;
+export default TodoApp;

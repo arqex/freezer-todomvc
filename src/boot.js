@@ -1,11 +1,11 @@
-var React = require('react');
-var TodoApp = require('./ui/App');
+import React from 'react';
+import ReactDom from 'react-dom'
+import App from './components/App';
 
-// Include the the reactions in order
-// to respond to the state changes.
-require('./todoReactions');
+// This will make our app reactive
+import './state/todoReactions';
 
-React.render(
-	<TodoApp />,
-	document.getElementById('root')
+ReactDom.render(
+  <App />,
+  document.getElementById('root')
 );

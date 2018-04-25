@@ -7,8 +7,8 @@ so ideally your React components just trigger events, being
 completely decoupled from actions/reactions.
  */
 
-var State = require('./state');
-var Utils = require('./utils');
+import store from './store';
+import Utils from './utils';
 
 // Wait to emulate a server request.
 var lag = 1000;
@@ -18,15 +18,15 @@ var lag = 1000;
  * Creates a new todo and add it to the list.
  * @param  {String} The todo content.
  */
-State.on('todo:create', function( text ){
+store.on('todo:create', function( text ){
 
 	// We set the app into a loading status
 	// to let the user know
-	State.get().set({status: 'loading'});
+	store.get().set({status: 'loading'});
 
 	// Call the fake server
 	setTimeout( function(){
-		State.get()
+		store.get()
 			// Restore the default status for the app and clean
 			// the input
 			.set( {status: 'ready', todoInput: ''} )
@@ -46,7 +46,7 @@ State.on('todo:create', function( text ){
 		;
 
 		// Save the state in localStorage
-		Utils.store('freezerTodos', State.get());
+		Utils.store('freezerTodos', store.get());
 	}, lag);
 });
 
@@ -54,7 +54,7 @@ State.on('todo:create', function( text ){
  * Deletes a todo.
  * @param  { FreezerNode } The todo to delete.
  */
-State.on('todo:delete', function( todo ){
+store.on('todo:delete', function( todo ){
 
 	// Since we are receiving the todo to delete from
 	// the arguments. We can use directly instead of
@@ -65,12 +65,12 @@ State.on('todo:delete', function( todo ){
 
 	setTimeout( function(){
 		// We just remove the todo from teh list
-		State.get()
+		store.get()
 			.todos.splice( getTodoIndex( updated ), 1 )
 		;
 
 		// Save the state in localStorage
-		Utils.store('freezerTodos', State.get());
+		Utils.store('freezerTodos', store.get());
 	}, lag);
 });
 
@@ -81,7 +81,7 @@ State.on('todo:delete', function( todo ){
  * @param  {FreezerNode} todo   The todo to update.
  * @param  {String} text    The new text for the todo.
  */
-State.on('todo:update', function( todo, text ){
+store.on('todo:update', function( todo, text ){
 	// Set the todo in an 'updating' state
 	// to let the user know.
 	// The updated node is returned.
@@ -89,7 +89,7 @@ State.on('todo:update', function( todo, text ){
 
 	// Call the server
 	setTimeout( function(){
-		var todo = State.get().todos[ getTodoIndex( updated ) ];
+		var todo = store.get().todos[ getTodoIndex( updated ) ];
 
 		// We need to pivot in the node to modify multiple children.
 		// Pivoting will make children changes return the updated
@@ -100,7 +100,7 @@ State.on('todo:update', function( todo, text ){
 		;
 
 		// Save the state in localStorage
-		Utils.store('freezerTodos', State.get());
+		Utils.store('freezerTodos', store.get());
 	}, lag);
 });
 
@@ -108,18 +108,18 @@ State.on('todo:update', function( todo, text ){
  * Set a filter for the todos.
  * @param  {String} The filter to apply. It can be 'all'|'completed'|'active'.
  */
-State.on('todo:filter', function( filter ){
-	State.get().set({ filter: filter });
+store.on('todo:filter', function( filter ){
+	store.get().set({ filter: filter });
 
 	// Save the state in localStorage
-	Utils.store('freezerTodos', State.get());
+	Utils.store('freezerTodos', store.get());
 });
 
 /**
  * Removes completed nodes from the list.
  */
-State.on('todo:clearCompleted', function(){
-	var todos = State.get().todos.pivot(),
+store.on('todo:clearCompleted', function(){
+	var todos = store.get().todos.pivot(),
 		toRemove = []
 	;
 
@@ -135,7 +135,7 @@ State.on('todo:clearCompleted', function(){
 
 	// Call the server
 	setTimeout( function(){
-		var todos = State.get().todos;
+		var todos = store.get().todos;
 
 		// Remove all the completed children now.
 		toRemove.forEach( function( i ){
@@ -143,7 +143,7 @@ State.on('todo:clearCompleted', function(){
 		});
 
 		// Save the state in localStorage
-		Utils.store('freezerTodos', State.get());
+		Utils.store('freezerTodos', store.get());
 	}, lag);
 });
 
@@ -151,11 +151,11 @@ State.on('todo:clearCompleted', function(){
  * Marks a todo as complete or active.
  * @param {FreezerNode} The todo to toggle.
  */
-State.on('todo:toggle', function( todo ){
+store.on('todo:toggle', function( todo ){
 	todo.model.set({ completed: !todo.model.completed });
 
 	// Save the state in localStorage
-	Utils.store('freezerTodos', State.get());
+	Utils.store('freezerTodos', store.get());
 });
 
 
@@ -168,7 +168,7 @@ State.on('todo:toggle', function( todo ){
 var getTodoIndex = function( todo ){
 	var i = 0,
 		found = false,
-		todos = State.get().todos
+		todos = store.get().todos
 	;
 
 	while( i<todos.length && found === false ){

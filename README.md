@@ -3,9 +3,9 @@ Freezer TodoMVC
 
 This is an example on how to use the awesome library [Freezer](https://github.com/arqex/freezer) to create a flux application. The app is the well known todo react example from [todomvc.com](http://todomvc.com/) adapted to use Freezer.
 
-It uses [React.js](https://facebook.github.io/react/), of course and the outstanding [react-hot-loader](https://github.com/gaearon/react-hot-loader) as a development server.
+It uses [React.js](https://facebook.github.io/react/) of course.
 
-#### [Check the live DEMO](https://freezer-todomvc.firebaseapp.com/)
+#### [Check the live DEMO](https://codesandbox.io/s/k52lvw99qo)
 
 ### Install and use
 
@@ -13,7 +13,7 @@ It uses [React.js](https://facebook.github.io/react/), of course and the outstan
 git clone https://github.com/arqex/freezer-todomvc
 npm install
 npm start
-open http://localhost:3000
+open http://localhost:3001
 ```
 
 ### Understanding it

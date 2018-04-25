@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 		uuid: function () {
 			/*jshint bitwise:false */
 			var i, random;

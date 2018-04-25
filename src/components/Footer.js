@@ -1,20 +1,20 @@
-var React = require('react');
-var Utils = require('../utils');
-var State = require('../state');
+import React from 'react';
+import Utils from '../state/utils';
+import store from '../state/store';
 
-module.exports = React.createClass({
-	handleClearCompleted: function(){
-		State.trigger('todo:clearCompleted');
-	},
+export default class Footer extends React.Component {
+	handleClearCompleted(){
+		store.emit('todo:clearCompleted');
+	}
 
-	handleFilter: function( filter ){
+	handleFilter( filter ){
 		return function( e ){
 			e.preventDefault();
-			State.trigger('todo:filter', filter);
+			store.emit('todo:filter', filter);
 		};
-	},
+	}
 
-	render: function () {
+	render () {
 		var activeTodoWord = Utils.pluralize(this.props.count, 'item'),
 			nowShowing = this.props.nowShowing,
 			clearButton = null,
@@ -53,4 +53,4 @@ module.exports = React.createClass({
 			</footer>
 		);
 	}
-});
+};

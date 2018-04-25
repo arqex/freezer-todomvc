@@ -1,28 +1,26 @@
-var React = require('react'),
-	TodoItem = require('./TodoItem')
-;
+import React from 'react';
+import TodoItem from './TodoItem';
 
-var TodoList = React.createClass({
-
-	render: function() {
+class TodoList extends React.Component {
+	render(){
  		var todoItems = [],
  			filter = this.props.filter
  		;
 
-		this.props.todos.forEach(function (todo) {
+		this.props.todos.forEach( todo => {
 			if( filter == 'all' || filter == 'completed' && todo.model.completed || filter == 'active' && !todo.model.completed ){
 				todoItems.push( <TodoItem todo={ todo } key={ todo.model.id }/> );
 			}
-		}, this);
+		});
 
 		return (
 			<ul className="todo-list">
 				{todoItems}
 			</ul>
 		);
-	},
+	}
 
-	shouldComponentUpdate: function( nextProps ){
+	shouldComponentUpdate( nextProps ){
 		// Thanks to freezer's immutabilty we can check if there
 		// has been a change in any todo just comparing the todo
 		// object. This will boost our app performance drastically.
@@ -31,6 +29,6 @@ var TodoList = React.createClass({
 		;
 	}
 
-});
+};
 
-module.exports = TodoList;
+export default TodoList;

@@ -1,6 +1,5 @@
-var Freezer = require('freezer-js'),
-	Utils = require('./utils')
-;
+import Freezer from 'freezer-js';
+import Utils from './utils';
 
 // Try to recover the state from the localStorage
 var state = Utils.store('freezerTodos') || {
@@ -11,4 +10,4 @@ var state = Utils.store('freezerTodos') || {
 };
 
 // Returns the freezer instance with the state.
-module.exports = new Freezer( state );
+export default new Freezer( state );

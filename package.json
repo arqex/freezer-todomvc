@@ -1,10 +1,10 @@
 {
   "name": "freezer-todomvc",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Demo on how to use freezer as a complete flux library.",
   "scripts": {
-    "start": "node server.js",
-    "lint": "eslint src"
+    "start": "node_modules/.bin/webpack-dev-server --config config/webpack",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -28,16 +28,20 @@
   },
   "homepage": "https://github.com/arqex/freezer-todomvc",
   "devDependencies": {
-    "babel-core": "^5.4.7",
-    "babel-eslint": "^3.1.9",
-    "babel-loader": "^5.1.2",
-    "eslint-plugin-react": "^2.3.0",
-    "react-hot-loader": "^1.3.0",
-    "webpack": "^1.9.6",
-    "webpack-dev-server": "^1.8.2"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
   "dependencies": {
-    "freezer-js": "^0.7.1",
-    "react": "^0.13.0"
+    "freezer-js": "^0.14.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   }
 }
